@@ -56,28 +56,28 @@ function main() {
 
             let store = {
                 "author": author,
-                "markdown": "https://raw.githubusercontent.com/bcmdy/JsHook-Script-Repo/" + branch + "/Scripts/" + name + "/README.md",
+                "markdown": "https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/" + branch + "/Scripts/" + name + "/README.md",
                 "ctime": ctime,
-                "source": "https://github.com/bcmdy/JsHook-Script-Repo/tree/" + branch + "/Scripts/" + name,
+                "source": "https://github.com/yuanshi2016/JsHook-Script-Plus/tree/" + branch + "/Scripts/" + name,
                 "id": name,
                 "title": name,
                 "type": scriptType,
                 "version": version,
-                "url": "https://raw.githubusercontent.com/bcmdy/JsHook-Script-Repo/" + branch + "/Scripts/" + name + "/" + scriptType + ".js",
+                "url": "https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/" + branch + "/Scripts/" + name + "/" + scriptType + ".js",
                 "desc": description,
                 "down_count": 999
             };
             stores.push(store);
             let store_cdn = {
                 "author": author,
-                "markdown": "https://cdn.jsdelivr.net/gh/bcmdy/JsHook-Script-Repo@" + branch + "/Scripts/" + name + "/README.md",
+                "markdown": "https://cdn.jsdelivr.net/gh/yuanshi2016/JsHook-Script-Plus@" + branch + "/Scripts/" + name + "/README.md",
                 "ctime": ctime,
-                "source": "https://github.com/bcmdy/JsHook-Script-Repo/tree/" + branch + "/Scripts/" + name,
+                "source": "https://github.com/yuanshi2016/JsHook-Script-Plus/tree/" + branch + "/Scripts/" + name,
                 "id": name,
                 "title": name,
                 "type": scriptType,
                 "version": version,
-                "url": "https://cdn.jsdelivr.net/gh/bcmdy/JsHook-Script-Repo@" + branch + "/Scripts/" + name + "/" + scriptType + ".js",
+                "url": "https://cdn.jsdelivr.net/gh/yuanshi2016/JsHook-Script-Plus@" + branch + "/Scripts/" + name + "/" + scriptType + ".js",
                 "desc": description,
                 "down_count": 999
             };
@@ -119,7 +119,7 @@ function getAllFiles(filePath) {
 // if (fs.existsSync(url)) {
 //     console.log('start read file:', url);
 //     let data = fs.readFileSync(url, 'utf-8');
-//     data = data.replaceAll('https://raw.githubusercontent.com/bcmdy/JsHook-Script-Repo/main/', 'https://cdn.jsdelivr.net/gh/bcmdy/JsHook-Script-Repo/');
+//     data = data.replaceAll('https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/main/', 'https://cdn.jsdelivr.net/gh/yuanshi2016/JsHook-Script-Plus/');
 //     // data = data.replaceAll('/main/', '/');
 //     // console.log(data);
 //     fs.writeFileSync('Store-cdn.json', data);

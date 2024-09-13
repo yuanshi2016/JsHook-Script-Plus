@@ -4,9 +4,9 @@
  *  @author 墨殇
  *  @version 5.0.0
  *  @date 2024-9-1
- *  @url https://github.com/bcmdy/JsHook-Script-Repo
- *  @url https://raw.githubusercontent.com/bcmdy/JsHook-Script-Repo/master/Scripts/番茄免费小说/Frida.js
- *  @url https://raw.githubusercontent.com/bcmdy/JsHook-Script-Repo/master/Scripts/番茄免费小说/README.md
+ *  @url https://github.com/yuanshi2016/JsHook-Script-Plus
+ *  @url https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/master/Scripts/番茄免费小说/Frida.js
+ *  @url https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/master/Scripts/番茄免费小说/README.md
  * 2024年9月1日进行了全部重写
  */
 /**
