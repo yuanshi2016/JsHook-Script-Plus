@@ -78,7 +78,7 @@ function bytesToUTF8(bytes) {
     }
     return result;
 }
-
+let currentActivityThread = null;
 Java.perform(function () {
     var MainActivity = Java.use("com.taobao.idlefish.maincontainer.activity.MainActivity");
     var SwitchConfig = Java.use('mtopsdk.mtop.global.SwitchConfig');
@@ -96,30 +96,65 @@ Java.perform(function () {
         console.log(`ExceptionCheck.mtopExceptionCheck result=${result}`);
         return result;
     };
-    // mtop.taobao.idle.awesome.detail.unit 闲鱼宝贝详情
-    let MtopRemoteCallback = Java.use("com.taobao.android.remoteobject.mtop.MtopRemoteCallback");
-    MtopRemoteCallback["onJsonReturn"].overload('com.taobao.android.remoteobject.core.RemoteContext', 'java.util.Map', 'com.taobao.android.remoteobject.mtop.MtopBaseReturn').implementation = function (remoteContext, map, mtopBaseReturn) {
+
+// mtop.taobao.idle.awesome.detail.unit 闲鱼宝贝详情
+    // mtop.taobao.idle.cco.court.dispute.detail 小法庭判决详情页
+    // mtop.taobao.idle.cco.court.report.casedetail 小法庭违规判决
+    let BusinessErrorAfterFilter = Java.use("mtopsdk.framework.filter.after.BusinessErrorAfterFilter");
+    BusinessErrorAfterFilter["doAfter"].implementation = function (mtopContext) {
+
+        let result = this["doAfter"](mtopContext);
+        let mtopBaseReturn = mtopContext.mtopResponse.value
+        // console.log(mtopContext.mtopResponse.value.getDataJsonObject())
+
         try {
             // console.log(mtopBaseReturn.getApi())
+            var context = Java.use('android.app.ActivityThread').currentApplication().getApplicationContext();
+            let json_ = JSON.parse(mtopBaseReturn.getDataJsonObject().toString())
+            let text = "";
             switch (mtopBaseReturn.getApi()) {
+                case "mtop.taobao.idle.cco.court.dispute.detail":
+                    json_ = json_.taskInfo
+                    if(json_.voteBuyerCount >= 0){
+                        text += `支持买家:${json_.voteBuyerCount} \n`;
+                    }
+                    if(json_.voteSellerCount){
+                        text += `支持卖家:${json_.voteSellerCount}`;
+                    }
+                    break
+                case "mtop.taobao.idle.cco.court.report.casedetail":
+                    json_ = JSON.parse(json_.taskInfo.taskVoteResult)
+                    if(json_.noCount){
+                        text += `反对人数:${json_.noCount} \n`;
+                    }
+                    if(json_.yesCount){
+                        text += `支持人数:${json_.noCount}`;
+                    }
+                    break
                 case "mtop.taobao.idle.awesome.detail.unit":
-                    let json_ = JSON.parse(mtopBaseReturn.getData().toString())
                     json_.flowData.body.sections[0].components.forEach((item, index) => {
+                        if (item.data.resell) {
+                            text += `购买时间:${item.data.resell.buyTime} \n`;
+                            // text += `购买价格:${item.data.resell.oriPrice} \n`;
+                        }
                         if (item.data.editTimeStr) {
-                            var context = Java.use('android.app.ActivityThread').currentApplication().getApplicationContext();
-                            Java.scheduleOnMainThread(function () {
-                                var toast = Java.use("android.widget.Toast");
-                                toast.makeText(Java.use("android.app.ActivityThread").currentApplication().getApplicationContext(), Java.use("java.lang.String").$new(`发布时间:${item.data.editTimeStr}`), 1).show();
-                            });
+                            text += `发布时间:${item.data.editTimeStr}`;
                             // console.log("发布时间:" + item.data.editTimeStr);
                         }
                     });
+                    
                     break;
+            }
+            if(text){
+                Java.scheduleOnMainThread(function () {
+                        var toast = Java.use("android.widget.Toast");
+                        toast.makeText(Java.use("android.app.ActivityThread").currentApplication().getApplicationContext(), Java.use("java.lang.String").$new(`${text}`), 3).show();
+                    });
             }
         } catch (error) {
             console.log("运行失败:" + error)
         }
-        this["onJsonReturn"](remoteContext, map, mtopBaseReturn);
-    };
 
+        return result;
+    };
 });
