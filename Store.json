@@ -1,5 +1,17 @@
 [
 	{
+		"author": "Yuanshi",
+		"markdown": "https://gh-proxy.com/https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/master/Scripts/闲鱼/README.md",
+		"ctime": "2024-09-13 16:40:26",
+		"source": "https://github.com/yuanshi2016/JsHook-Script-Plus/tree/master/Scripts/闲鱼",
+		"id": "闲鱼",
+		"title": "闲鱼",
+		"type": "Frida",
+		"version": "1.0",
+		"url": "https://gh-proxy.com/https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/master/Scripts/闲鱼/Frida.js",
+		"desc": "闲鱼脚本",
+		"down_count": 777
+	},{
 		"author": "hluwa",
 		"markdown": "https://raw.githubusercontent.com/yuanshi2016/JsHook-Script-Plus/master/Scripts/FRIDA-DEXDump/README.md",
 		"ctime": "2023/6/2 18:17:28",
